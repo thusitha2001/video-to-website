@@ -1,0 +1,9 @@
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { useState } from 'react';
+import { Mail, Music, Heart } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Scrapbook, pageHead } from '@/components/birthday/scrapbook';
+import panda from '@/assets/panda.png';
+import bouquet from '@/assets/bouquet.png';
+export const Route=createFileRoute('/gifts')({head:()=>pageHead('Your Birthday Gifts','A song, some flowers, and a letter from the heart.'),component:Gifts});
+function Gifts(){const [accepted,setAccepted]=useState(false);const [declined,setDeclined]=useState(false);return <Scrapbook>{!accepted?<><h1 className="accept-title">PLEASE ACCEPT THE GIFT</h1><img className="panda-gift" src={panda} width={768} height={1024} alt="A panda holding a heart"/><div className="accept-actions"><Button variant="gift" onClick={()=>setAccepted(true)}>YES <Heart/></Button><Button variant="gift" onClick={()=>setDeclined(true)}>{declined?'Pretty please?':'NO'}</Button></div>{declined&&<p className="decline-note">But I made it just for you... ♡</p>}</>:<><h1 className="section-title">Choose Your Gifts!</h1><div className="gift-options"><Button variant="ghost" className="gift-choice" asChild><Link to="/letter"><Mail/><span>A little letter</span></Link></Button><Button variant="ghost" className="gift-choice" asChild><Link to="/flowers"><img src={bouquet} width={768} height={1024} alt="A bouquet of roses"/><span>Flowers for you</span></Link></Button><Button variant="ghost" className="gift-choice" asChild><Link to="/music"><Music/><span>Our little song</span></Link></Button></div></>}</Scrapbook>;}
