@@ -10,33 +10,90 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BirthdayRouteImport } from './routes/birthday'
+import { Route as FlowersRouteImport } from './routes/flowers'
+import { Route as GiftsRouteImport } from './routes/gifts'
+import { Route as LetterRouteImport } from './routes/letter'
+import { Route as MusicRouteImport } from './routes/music'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BirthdayRoute = BirthdayRouteImport.update({
+  id: '/birthday',
+  path: '/birthday',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FlowersRoute = FlowersRouteImport.update({
+  id: '/flowers',
+  path: '/flowers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GiftsRoute = GiftsRouteImport.update({
+  id: '/gifts',
+  path: '/gifts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LetterRoute = LetterRouteImport.update({
+  id: '/letter',
+  path: '/letter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MusicRoute = MusicRouteImport.update({
+  id: '/music',
+  path: '/music',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/birthday': typeof BirthdayRoute
+  '/flowers': typeof FlowersRoute
+  '/gifts': typeof GiftsRoute
+  '/letter': typeof LetterRoute
+  '/music': typeof MusicRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/birthday': typeof BirthdayRoute
+  '/flowers': typeof FlowersRoute
+  '/gifts': typeof GiftsRoute
+  '/letter': typeof LetterRoute
+  '/music': typeof MusicRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/birthday': typeof BirthdayRoute
+  '/flowers': typeof FlowersRoute
+  '/gifts': typeof GiftsRoute
+  '/letter': typeof LetterRoute
+  '/music': typeof MusicRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/birthday' | '/flowers' | '/gifts' | '/letter' | '/music'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/birthday' | '/flowers' | '/gifts' | '/letter' | '/music'
+  id:
+    | '__root__'
+    | '/'
+    | '/birthday'
+    | '/flowers'
+    | '/gifts'
+    | '/letter'
+    | '/music'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BirthdayRoute: typeof BirthdayRoute
+  FlowersRoute: typeof FlowersRoute
+  GiftsRoute: typeof GiftsRoute
+  LetterRoute: typeof LetterRoute
+  MusicRoute: typeof MusicRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +105,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/birthday': {
+      id: '/birthday'
+      path: '/birthday'
+      fullPath: '/birthday'
+      preLoaderRoute: typeof BirthdayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/flowers': {
+      id: '/flowers'
+      path: '/flowers'
+      fullPath: '/flowers'
+      preLoaderRoute: typeof FlowersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gifts': {
+      id: '/gifts'
+      path: '/gifts'
+      fullPath: '/gifts'
+      preLoaderRoute: typeof GiftsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/letter': {
+      id: '/letter'
+      path: '/letter'
+      fullPath: '/letter'
+      preLoaderRoute: typeof LetterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/music': {
+      id: '/music'
+      path: '/music'
+      fullPath: '/music'
+      preLoaderRoute: typeof MusicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BirthdayRoute: BirthdayRoute,
+  FlowersRoute: FlowersRoute,
+  GiftsRoute: GiftsRoute,
+  LetterRoute: LetterRoute,
+  MusicRoute: MusicRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
