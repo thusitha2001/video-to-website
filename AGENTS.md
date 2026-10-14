@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep each birthday experience screen in its own TanStack route, with shared scrapbook artwork in reusable components, so navigation and styling remain consistent.
+- Keep the surprise passcode as a client-side presentation gate, not authentication; no private data is protected by it.
