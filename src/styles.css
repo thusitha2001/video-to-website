@@ -99,6 +99,10 @@
 .blow-popup{position:absolute;bottom:calc(100% + 14px);left:50%;width:max-content;max-width:240px;padding:10px 16px;background:var(--primary);color:var(--primary-foreground);border-radius:14px;font-size:13px;font-weight:800;line-height:1.4;box-shadow:var(--shadow);z-index:5;animation:blow-popup-in .55s cubic-bezier(.2,.9,.3,1.4) .3s both,blow-popup-bob 1.6s ease-in-out .9s infinite}
 .blow-popup:after{content:'';position:absolute;top:100%;left:50%;margin-left:-9px;border:9px solid transparent;border-top-color:var(--primary)}
 .blow-button{animation:blow-pulse 1.4s ease-out infinite}
+.continue-locked{opacity:.5;cursor:not-allowed}
+.continue-locked:hover{background:var(--paper);transform:none}
+.blow-popup.nudge{animation:blow-popup-shake .5s ease both,blow-popup-bob 1.6s ease-in-out .5s infinite}
+@keyframes blow-popup-shake{0%,100%{transform:translateX(-50%)}20%{transform:translateX(calc(-50% - 9px)) rotate(-3deg)}40%{transform:translateX(calc(-50% + 9px)) rotate(3deg)}60%{transform:translateX(calc(-50% - 6px)) rotate(-2deg)}80%{transform:translateX(calc(-50% + 6px)) rotate(2deg)}}
 @keyframes blow-popup-in{from{opacity:0;transform:translateX(-50%) translateY(10px) scale(.4)}to{opacity:1;transform:translateX(-50%) scale(1)}}
 @keyframes blow-popup-bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-5px)}}
 @keyframes blow-pulse{0%{box-shadow:var(--small-shadow),0 0 0 0 oklch(.72 .13 8 / .55)}70%{box-shadow:var(--small-shadow),0 0 0 14px oklch(.72 .13 8 / 0)}100%{box-shadow:var(--small-shadow),0 0 0 0 oklch(.72 .13 8 / 0)}}
