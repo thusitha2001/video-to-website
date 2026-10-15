@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react';
 import { Delete } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { pageHead } from '@/components/birthday/scrapbook';
-import { markUnlocked, readUnlocked } from '@/components/birthday/unlock';
-import couple from '@/assets/bear-bunny.png';
+import { markUnlocked } from '@/components/birthday/unlock';
+import { useCutoutImage } from '@/components/birthday/use-cutout-image';
+const PASSCODE = '1523';
 
 export const Route = createFileRoute('/')({
   head: () => pageHead('A Little Surprise', 'Unlock a birthday surprise made just for you.'),
@@ -15,17 +16,17 @@ function Index() {
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (readUnlocked()) void navigate({ to: '/birthday', replace: true });
-  }, [navigate]);
+  const cartoon = useCutoutImage('/cartoon/lockscreen.jpeg');
 
   const unlock = () => {
-    if (code.length === 4) {
+    if (code.length !== 4) {
+      setError('A little secret needs four digits ♡');
+    } else if (code !== PASSCODE) {
+      setError('Not quite... try again ♡');
+      setCode('');
+    } else {
       markUnlocked();
       void navigate({ to: '/birthday' });
-    } else {
-      setError('A little secret needs four digits ♡');
     }
   };
 
@@ -49,7 +50,7 @@ function Index() {
     <main className="lock-page">
       <section className="lock-art" aria-label="Made with love">
         <div className="art-paper">
-          <img className="couple-img" src={couple} width={1024} height={1024} alt="A bear and bunny sharing a little pink heart" />
+          <img className="couple-img cutout-img" src={cartoon ?? undefined} style={{ visibility: cartoon ? 'visible' : 'hidden' }} width={453} height={551} alt="Cartoon portrait of a couple, a woman in a pink floral top beside a bearded man in a dark cap" />
           {Array.from({ length: 5 }, (_, i) => <span className="mini-heart" key={i} aria-hidden="true">♥</span>)}
         </div>
       </section>

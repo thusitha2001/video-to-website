@@ -14,6 +14,7 @@ import { Route as BirthdayRouteImport } from './routes/birthday'
 import { Route as FlowersRouteImport } from './routes/flowers'
 import { Route as GiftsRouteImport } from './routes/gifts'
 import { Route as LetterRouteImport } from './routes/letter'
+import { Route as MemoriesRouteImport } from './routes/memories'
 import { Route as MusicRouteImport } from './routes/music'
 
 const IndexRoute = IndexRouteImport.update({
@@ -41,6 +42,11 @@ const LetterRoute = LetterRouteImport.update({
   path: '/letter',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MemoriesRoute = MemoriesRouteImport.update({
+  id: '/memories',
+  path: '/memories',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MusicRoute = MusicRouteImport.update({
   id: '/music',
   path: '/music',
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/flowers': typeof FlowersRoute
   '/gifts': typeof GiftsRoute
   '/letter': typeof LetterRoute
+  '/memories': typeof MemoriesRoute
   '/music': typeof MusicRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/flowers': typeof FlowersRoute
   '/gifts': typeof GiftsRoute
   '/letter': typeof LetterRoute
+  '/memories': typeof MemoriesRoute
   '/music': typeof MusicRoute
 }
 export interface FileRoutesById {
@@ -70,13 +78,28 @@ export interface FileRoutesById {
   '/flowers': typeof FlowersRoute
   '/gifts': typeof GiftsRoute
   '/letter': typeof LetterRoute
+  '/memories': typeof MemoriesRoute
   '/music': typeof MusicRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/birthday' | '/flowers' | '/gifts' | '/letter' | '/music'
+  fullPaths:
+    | '/'
+    | '/birthday'
+    | '/flowers'
+    | '/gifts'
+    | '/letter'
+    | '/memories'
+    | '/music'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/birthday' | '/flowers' | '/gifts' | '/letter' | '/music'
+  to:
+    | '/'
+    | '/birthday'
+    | '/flowers'
+    | '/gifts'
+    | '/letter'
+    | '/memories'
+    | '/music'
   id:
     | '__root__'
     | '/'
@@ -84,6 +107,7 @@ export interface FileRouteTypes {
     | '/flowers'
     | '/gifts'
     | '/letter'
+    | '/memories'
     | '/music'
   fileRoutesById: FileRoutesById
 }
@@ -93,6 +117,7 @@ export interface RootRouteChildren {
   FlowersRoute: typeof FlowersRoute
   GiftsRoute: typeof GiftsRoute
   LetterRoute: typeof LetterRoute
+  MemoriesRoute: typeof MemoriesRoute
   MusicRoute: typeof MusicRoute
 }
 
@@ -133,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LetterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/memories': {
+      id: '/memories'
+      path: '/memories'
+      fullPath: '/memories'
+      preLoaderRoute: typeof MemoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/music': {
       id: '/music'
       path: '/music'
@@ -149,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   FlowersRoute: FlowersRoute,
   GiftsRoute: GiftsRoute,
   LetterRoute: LetterRoute,
+  MemoriesRoute: MemoriesRoute,
   MusicRoute: MusicRoute,
 }
 export const routeTree = rootRouteImport

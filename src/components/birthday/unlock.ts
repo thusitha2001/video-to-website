@@ -1,17 +1,10 @@
-const KEY = 'birthday-unlocked';
+// Held in memory only, so every full page load (refresh) starts at the passcode screen again.
+let unlocked = false;
 
 export function readUnlocked(): boolean {
-  try {
-    return window.localStorage.getItem(KEY) === 'yes';
-  } catch {
-    return false;
-  }
+  return typeof window !== 'undefined' && unlocked;
 }
 
 export function markUnlocked(): void {
-  try {
-    window.localStorage.setItem(KEY, 'yes');
-  } catch {
-    /* storage unavailable — the passcode screen simply stays put */
-  }
+  unlocked = true;
 }
