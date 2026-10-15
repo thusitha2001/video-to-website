@@ -4,11 +4,14 @@ import { Delete } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { pageHead } from '@/components/birthday/scrapbook';
 import { markUnlocked } from '@/components/birthday/unlock';
-import { useCutoutImage } from '@/components/birthday/use-cutout-image';
 const PASSCODE = '1523';
+const LOCK_IMAGE = '/cartoon/lockscreen-cutout.webp';
 
 export const Route = createFileRoute('/')({
-  head: () => pageHead('A Little Surprise', 'Unlock a birthday surprise made just for you.'),
+  head: () => ({
+    ...pageHead('A Little Surprise', 'Unlock a birthday surprise made just for you.'),
+    links: [{ rel: 'preload', as: 'image', href: LOCK_IMAGE, type: 'image/webp', fetchPriority: 'high' }],
+  }),
   component: Index,
 });
 
@@ -16,8 +19,6 @@ function Index() {
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const cartoon = useCutoutImage('/cartoon/lockscreen.jpeg');
-
   const unlock = () => {
     if (code.length !== 4) {
       setError('A little secret needs four digits ♡');
@@ -50,7 +51,7 @@ function Index() {
     <main className="lock-page">
       <section className="lock-art" aria-label="Made with love">
         <div className="art-paper">
-          <img className="couple-img cutout-img" src={cartoon ?? undefined} style={{ visibility: cartoon ? 'visible' : 'hidden' }} width={453} height={551} alt="Cartoon portrait of a couple, a woman in a pink floral top beside a bearded man in a dark cap" />
+          <img className="couple-img cutout-img" src={LOCK_IMAGE} fetchPriority="high" decoding="async" width={928} height={1129} alt="Cartoon portrait of a couple, a woman in a pink floral top beside a bearded man in a dark cap" />
           {Array.from({ length: 5 }, (_, i) => <span className="mini-heart" key={i} aria-hidden="true">♥</span>)}
         </div>
       </section>
